@@ -75,6 +75,33 @@ RSpec.describe "bundle install across platforms" do
     expect(the_bundle).to include_gems "platform_specific 1.0 RUBY"
   end
 
+  it "pulls in the correct architecture gem on universal Rubies" do
+    lockfile <<-G
+      GEM
+        remote: #{file_uri_for(gem_repo1)}
+        specs:
+          darwin_single_arch (1.0)
+          darwin_single_arch (1.0-arm64-darwin)
+          darwin_single_arch (1.0-x86_64-darwin)
+
+      PLATFORMS
+        ruby
+
+      DEPENDENCIES
+        darwin_single_arch
+    G
+
+    simulate_ruby_platform "universal.x86_64-darwin21"
+    simulate_platform "universal-darwin-21"
+    install_gemfile <<-G
+      source "#{file_uri_for(gem_repo1)}"
+
+      gem "darwin_single_arch"
+    G
+
+    expect(the_bundle).to include_gems "darwin_single_arch 1.0 x86_64-darwin"
+  end
+
   it "works with gems that have different dependencies" do
     simulate_platform "java"
     install_gemfile <<-G

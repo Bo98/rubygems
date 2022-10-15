@@ -138,6 +138,19 @@ module Spec
           s.write "lib/platform_specific.rb", "PLATFORM_SPECIFIC = '1.0.0 x86-darwin-100'"
         end
 
+        build_gem "darwin_single_arch" do |s|
+          s.platform = "ruby"
+          s.write "lib/darwin_single_arch.rb", "DARWIN_SINGLE_ARCH = '1.0 RUBY'"
+        end
+        build_gem "darwin_single_arch" do |s|
+          s.platform = "arm64-darwin"
+          s.write "lib/darwin_single_arch.rb", "DARWIN_SINGLE_ARCH = '1.0 arm64-darwin'"
+        end
+        build_gem "darwin_single_arch" do |s|
+          s.platform = "x86_64-darwin"
+          s.write "lib/darwin_single_arch.rb", "DARWIN_SINGLE_ARCH = '1.0 x86_64-darwin'"
+        end
+
         build_gem "only_java", "1.0" do |s|
           s.platform = "java"
           s.write "lib/only_java.rb", "ONLY_JAVA = '1.0.0 JAVA'"
