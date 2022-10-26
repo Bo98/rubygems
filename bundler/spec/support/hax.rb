@@ -3,6 +3,7 @@
 if ENV["BUNDLER_SPEC_RUBY_PLATFORM"]
   Object.send(:remove_const, :RUBY_PLATFORM)
   RUBY_PLATFORM = ENV["BUNDLER_SPEC_RUBY_PLATFORM"]
+  raise "!!! #{RUBY_PLATFORM}, #{Object.const_get(:RUBY_PLATFORM)}"
 end
 
 module Gem
