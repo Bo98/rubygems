@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Rubygems, Bundler]
+        target: [Bundler]
     steps:
       - name: Set up latest ruby head
         uses: ruby/setup-ruby@v1
