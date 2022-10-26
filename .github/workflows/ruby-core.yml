@@ -53,6 +53,7 @@ jobs:
       - name: Sync tools
         run: |
           ruby tool/sync_default_gems.rb rubygems
+          ls -l lib/bundler
         working-directory: ruby/ruby
       - name: Test RubyGems
         run: make -j2 -s test-all TESTS="rubygems --no-retry"
