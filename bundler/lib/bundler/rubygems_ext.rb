@@ -310,6 +310,7 @@ module Gem
 
   # On universal Rubies, resolve the "universal" arch to the real CPU arch, without changing the extension directory.
   class Specification
+    raise "#{RUBY_PLATFORM} - #{Platform.local.cpu} - #{Platform.local.to_s}" if ENV["BUNDLER_SPEC_RUBY_PLATFORM"]
     if /^universal\.(?<arch>.*?)-/ =~ RUBY_PLATFORM
       local_platform = Platform.local
       if local_platform.cpu == "universal"
