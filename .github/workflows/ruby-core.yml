@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - master
+      - ruby-core-test
 
 concurrency:
   group: ci-${{ github.ref }}-${{ github.workflow }}
