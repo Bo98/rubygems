@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 if ENV["BUNDLER_SPEC_RUBY_PLATFORM"]
+  old_platform = RUBY_PLATFORM.dup
   Object.send(:remove_const, :RUBY_PLATFORM)
   RUBY_PLATFORM = ENV["BUNDLER_SPEC_RUBY_PLATFORM"]
+  raise "!!! #{old_platform} -> #{RUBY_PLATFORM}"
 end
 
 module Gem
